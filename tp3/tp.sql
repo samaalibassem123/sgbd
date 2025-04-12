@@ -34,7 +34,7 @@ declare
     primeMoy numeric(6,3);
     primeMoy_Error Exception;
 begin
-    select moy(nvl(prime, 0)) into primeMoy where lieutournoi=lieu
+    select moy(nvl(prime, 0)) into primeMoy from gain where lieutournoi=lieu and annee=annee
     if primeMoy is null then
         raise primeMoy_Error;
     end if ;
@@ -46,3 +46,14 @@ begin
     
 end;
 
+
+-- Exercice 3
+accept an1 number prompt "donnez an1 : ";
+accept an2 number prompt "donnez  an2 : ";
+
+declare
+    cursor c is select j.nom, g.prime from  joueuer j ,gain g where j.nujouer = g.nujouer;
+begin
+    open c
+    loop 
+        fetch c into 
